@@ -36,6 +36,8 @@ graph.add_edge("get_chat_response",END)
 
 
 chatBot = graph.compile(checkpointer=checkpointer)
+
+
 mermaid_code = chatBot.get_graph().draw_mermaid_png()
 with open("chatbot_o1.png",'wb') as f:
     f.write(mermaid_code)

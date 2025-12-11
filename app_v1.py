@@ -1,4 +1,5 @@
 import backend
+from checkpoint import get_connection
 import streamlit as st
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 import uuid

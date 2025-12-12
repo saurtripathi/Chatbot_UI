@@ -69,7 +69,18 @@ if user_input:
     st.session_state['message_history'].append({'role':'user','content':user_input})
     with st.chat_message('user'):
         st.text(user_input)
-    CONFIG = {"configurable":{"thread_id":st.session_state['thread_id']}}
+    # CONFIG = {"configurable":{"thread_id":st.session_state['thread_id']}}
+    # CONFIG updated to store the threads in langsmith project metadata
+    CONFIG = {
+         "configurable":{
+              "thread_id":st.session_state['thread_id']
+              },
+        "metadata":{
+             "thread_id":st.session_state['thread_id']
+        },
+        "run_name":"chatbot_execution"
+         }
+    
     with PostgresSaver.from_conn_string(get_db_url()) as checkpointer:
         checkpointer.setup()
         chatbot = build_graph().compile(checkpointer=checkpointer)
